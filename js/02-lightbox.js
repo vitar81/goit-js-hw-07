@@ -20,6 +20,10 @@ galleryItems.forEach((item) => {
   galleryList.appendChild(galleryItem);
 });
 
+galleryList.addEventListener("click", (event) => {
+  event.preventDefault();
+});
+
 const lightbox = new SimpleLightbox(".gallery__link", {
   captionsData: "alt",
   captionsDelay: 250,
