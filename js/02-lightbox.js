@@ -2,27 +2,25 @@ import { galleryItems } from "./gallery-items.js";
 // Change code below this line
 const galleryList = document.querySelector(".gallery");
 
-galleryItems.forEach((item) => {
-  const galleryItem = document.createElement("li");
-  galleryItem.classList.add("gallery__item");
+function getGallery() {
+  const galleryItemsMarkup = galleryItems
+    .map(
+      ({ preview, original, description }) =>
+        `<li class="gallery__item">
+      <a class="gallery__link" href="${original}">
+      <img 
+      class="gallery__image"
+      src="${preview}"
+      alt="${description}" />
+    </a>
+</li>`
+    )
+    .join("");
 
-  const link = document.createElement("a");
-  link.classList.add("gallery__link");
-  link.href = item.original;
+  galleryList.innerHTML = galleryItemsMarkup;
+}
 
-  const image = document.createElement("img");
-  image.classList.add("gallery__image");
-  image.src = item.preview;
-  image.alt = item.description;
-
-  link.appendChild(image);
-  galleryItem.appendChild(link);
-  galleryList.appendChild(galleryItem);
-});
-
-galleryList.addEventListener("click", (event) => {
-  event.preventDefault();
-});
+getGallery();
 
 const lightbox = new SimpleLightbox(".gallery__link", {
   captionsData: "alt",
